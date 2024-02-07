@@ -1,0 +1,58 @@
+version: v1.0
+workflows:
+  print_hello_world:
+    type: cwl
+    config:
+      file: main2.cwl
+      settings: main2.yml
+        #     bindings:
+        #       - step: /
+        #           target:
+        #             - deployment: docker1
+        #             - deployment: docker2
+        #             - deployment: docker3
+        #             - deployment: docker4
+        #         filters:
+        #           - shuffle
+            # deployments:
+            #   docker1:
+            #     type: ssh
+            #     lazy: False
+            #     config:
+            #       nodes:
+            #         - hostname: "localhost:2201"
+            #           username: "root"
+            #       username: "root"
+            #       checkHostKey: False
+            #   docker2:
+            #     type: ssh
+            #     lazy: False
+            #     config:
+            #       nodes:
+            #         - hostname: "localhost:2202"
+            #           username: "root"
+            #       username: "root"
+            #       checkHostKey: False
+            #   docker3:
+            #     type: ssh
+            #     lazy: False
+            #     config:
+            #       nodes:
+            #         - hostname: "localhost:2203"
+            #           username: "root"
+            #       username: "root"
+            #       checkHostKey: False
+            #   docker4:
+            #     type: ssh
+            #     lazy: False
+            #     config:
+            #       nodes:
+            #         - hostname: "localhost:2204"
+            #           username: "root"
+            #       username: "root"
+            #       checkHostKey: False
+
+bindingFilters:
+  shuffle:
+    type: "shuffle"
+    config: {}

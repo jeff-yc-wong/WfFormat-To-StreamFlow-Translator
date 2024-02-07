@@ -1,0 +1,28 @@
+stress-ng: info:  [89436] defaulting to a 1 day, 0 secs run per stressor
+stress-ng: info:  [89436] dispatching hogs: 4 vm
+Pi computed!
+Pi computed!
+Pi computed!
+Pi computed!
+Pi computed!
+Pi computed!
+['blastall_00000002.out', 'blastall_00000002.err']
+/private/tmp/docker_tmpx47hl2_5
+[WfBench] Starting blastall_00000002 Benchmark
+
+input data:  {'blastall_00000002_output.txt': 227273}
+[WfBench] Starting IO Read Benchmark...
+inputs: []
+[WfBench] Completed IO Read Benchmark!
+
+[WfBench] Starting CPU and Memory Benchmarks...
+[WfBench] Completed CPU and Memory Benchmarks!
+
+[WfBench] Writing output file 'blastall_00000002_output.txt'
+
+WfBench Benchmark completed!
+stress-ng: info:  [89436] skipped: 0
+stress-ng: info:  [89436] passed: 0
+stress-ng: info:  [89436] failed: 0
+stress-ng: info:  [89436] metrics untrustworthy: 0
+stress-ng: info:  [89436] successful run completed in 0.65 secs

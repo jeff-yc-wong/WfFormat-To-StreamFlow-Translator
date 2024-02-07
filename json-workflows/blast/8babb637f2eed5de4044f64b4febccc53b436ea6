@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/wongy/Documents/GitHub/WfFormat-To-StreamFlow-Translator/json-workflows/blast/wfbench.py", line 243, in <module>
+    main()
+  File "/Users/wongy/Documents/GitHub/WfFormat-To-StreamFlow-Translator/json-workflows/blast/wfbench.py", line 233, in main
+    outputs = json.loads(args.out.replace("'", '"'))
+  File "/Users/wongy/opt/anaconda3/envs/streamflow/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/Users/wongy/opt/anaconda3/envs/streamflow/lib/python3.9/json/decoder.py", line 340, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 1 column 45 (char 44)

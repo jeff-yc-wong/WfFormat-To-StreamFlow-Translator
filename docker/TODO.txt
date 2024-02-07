@@ -1,0 +1,2 @@
+- add wfbench.py and its dependencies into the Docker image
+

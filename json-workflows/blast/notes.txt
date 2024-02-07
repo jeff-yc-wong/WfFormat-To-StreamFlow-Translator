@@ -1,0 +1,2 @@
+- Do we want to keep all the intermediate files within the WfFormat workflow? No
+

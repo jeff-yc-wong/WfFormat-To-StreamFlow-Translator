@@ -1,0 +1,5 @@
+input_files:
+  - class: File
+    path: split_fasta_00000001_input.txt
+  - class: File
+    path: main2.cwl

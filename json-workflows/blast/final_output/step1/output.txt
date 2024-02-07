@@ -1,0 +1,21 @@
+stress-ng: info:  [89415] defaulting to a 1 day, 0 secs run per stressor
+stress-ng: info:  [89415] dispatching hogs: 4 vm
+Pi computed!
+Pi computed!
+Pi computed!
+Pi computed!
+Pi computed!
+Pi computed!
+['error.txt', 'output.txt']
+/private/tmp/docker_tmpxksd7h5y
+[WfBench] Starting split_fasta_00000001 Benchmark
+
+[WfBench] Starting CPU and Memory Benchmarks...
+[WfBench] Completed CPU and Memory Benchmarks!
+
+WfBench Benchmark completed!
+stress-ng: info:  [89415] skipped: 0
+stress-ng: info:  [89415] passed: 0
+stress-ng: info:  [89415] failed: 0
+stress-ng: info:  [89415] metrics untrustworthy: 0
+stress-ng: info:  [89415] successful run completed in 0.61 secs
