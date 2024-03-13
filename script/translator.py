@@ -119,7 +119,7 @@ class StreamFlowTranslator(Translator):
                 # TODO: change so that it doesn't only run wfbench programs
                 if not task.program == "wfbench.py":
                     raise ValueError("Only wfbench programs are supported")
-                self.cwl_script.append("    run: wfbench.cwl")
+                self.cwl_script.append("    run: clt/wfbench.cwl")
 
                 self.cwl_script.append("    in:")
                 if level == 0:
@@ -139,15 +139,13 @@ class StreamFlowTranslator(Translator):
                     f"      input_params: {{ default: {args_array} }}")
                 self.cwl_script.append("      step_name:")
                 self.cwl_script.append(f"        valueFrom: {task.name}")
-                self.cwl_script.append("      output_filenames:")
-                self.cwl_script.append(
-                    f"        valueFrom: $({output_files})")
+                self.cwl_script.append(f"      output_filenames: {{ default: {output_files} }}")
                 self.cwl_script.append(
                     "    out: [out, err, output_files]\n")
 
                 # Adding a step to create a directory with the output files
                 self.cwl_script.append(f"  {task.name}_folder:")
-                self.cwl_script.append("    run: folder.cwl")
+                self.cwl_script.append("    run: clt/folder.cwl")
                 self.cwl_script.append("    in:")
                 self.cwl_script.append("      - id: item")
                 self.cwl_script.append("        linkMerge: merge_flattened")
@@ -157,13 +155,13 @@ class StreamFlowTranslator(Translator):
                 self.cwl_script.append(f"          - {task.name}/output_files")
                 self.cwl_script.append("      - id: name")
                 self.cwl_script.append(f"        valueFrom: \"{level}_{task.name}\"")
-                self.cwl_script.append("    out: [out]")
+                self.cwl_script.append("    out: [out]\n")
 
                 # adding the folder id to grand list of step folders
                 steps_folder_source.append(f"{task.name}_folder")
 
         self.cwl_script.append("  final_folder:")
-        self.cwl_script.append("    run: folder.cwl")
+        self.cwl_script.append("    run: clt/folder.cwl")
         self.cwl_script.append("    in:")
         self.cwl_script.append("      - id: item")
         self.cwl_script.append("        linkMerge: merge_flattened")
@@ -203,15 +201,18 @@ class StreamFlowTranslator(Translator):
     def _write_streamflow_files(self, output_folder: pathlib.Path) -> None:
         cwl_folder = output_folder.joinpath("cwl")
         cwl_folder.mkdir(exist_ok=True)
-        shutil.copy(Path.cwd().joinpath("templates/wfbench.cwl"), cwl_folder)
-        shutil.copy(Path.cwd().joinpath("templates/folder.cwl"), cwl_folder)
+
+        clt_folder = cwl_folder.joinpath("clt")
+        clt_folder.mkdir(exist_ok=True)
+        shutil.copy(Path.cwd().joinpath("templates/wfbench.cwl"), clt_folder)
+        shutil.copy(Path.cwd().joinpath("templates/folder.cwl"), clt_folder)
+        shutil.copy(Path.cwd().joinpath("templates/local.yml"), output_folder)
 
         with open(cwl_folder.joinpath("main.cwl"), "w", encoding="utf-8") as f:
             f.write("\n".join(self.cwl_script))
 
         with (open(cwl_folder.joinpath("config.yml"), "w", encoding="utf-8")) as f:
             f.write("\n".join(self.yml_script))
-
 
 def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
@@ -234,7 +235,6 @@ def main():
     if not isinstance(outdir_path, Path):
         outdir_path = Path(outdir_path)
 
-    print(outdir_path)
     if not outdir_path.exists():
         outdir_path.mkdir(parents=True, exist_ok=True)
 
